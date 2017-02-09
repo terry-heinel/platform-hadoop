@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///usr/local/hadoop/data/datanode</value>
+    <description>
+      Determines where on the local filesystem a DFS data node should store
+      its blocks. If this is a comma-delimited list of directories, then data
+      will be stored in all named directories, typically on different devices.
+      The directories should be tagged with corresponding storage types
+      ([SSD]/[DISK]/[ARCHIVE]/[RAM_DISK]) for HDFS storage policies.
+      The default storage type will be DISK if the directory does not have a
+      storage type tagged explicitly. Directories that do not exist will be
+      created if local filesystem permission allows.
+      (default is file://${hadoop.tmp.dir}/dfs/data)
+    </description>
+  </property>
+  <property>
+    <name>dfs.replication</name>
+    <value>3</value>
+    <description>default 3</description>
+  </property>
+  <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>dfs.permissions.enabled</name>
+    <value>false</value>
+    <description>default true</description>
+  </property>
+  <property>
+    <name>dfs.datanode.use.datanode.hostname</name>
+    <value>false</value>
+    <description>default false</description>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>platform-hadoop-namenode:9870</value>
+    <description>
+        Your NameNode hostname for http access (default is 0.0.0.0:9870)
+        (previous default port was 50070, now 9870)
+    </description>
+  </property>
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>platform-hadoop-namenode:9868</value>
+    <description>
+      Your Secondary NameNode hostname for http access (default is 0.0.0.0:9868)
+      (previous default port was 50090, now 9868)
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.use.datanode.hostname</name>
+    <value>true</value>
+    <description>
+      default false
+      Whether clients should use datanode hostnames when connecting to datanodes.
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.block.write.replace-datanode-on-failure.enable</name>
+    <value>false</value>
+    <description>
+      default true
+      When the cluster size is extremely small, e.g. 3 nodes or less, cluster
+      administrators may want to set the policy to NEVER in the default
+      configuration file or disable this feature.  Otherwise, users may
+      experience an unusually high rate of pipeline failures since it is
+      impossible to find new datanodes for replacement.
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.block.write.replace-datanode-on-failure.policy</name>
+    <value>DEFAULT</value>
+    <description>
+      Only used if the value of dfs.client.block.write.replace-datanode-on-failure.enable is true
+      Options are DEFAULT, NEVER, and ALWAYS
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.block.write.replace-datanode-on-failure.best-effort</name>
+    <value>true</value>
+    <description>
+      default true
+      Only used if the value of dfs.client.block.write.replace-datanode-on-failure.enable is true.
+      Best effort means that the client will try to replace a failed datanode
+      in write pipeline (provided that the policy is satisfied), however, it 
+      continues the write operation in case that the datanode replacement also fails.
+      Setting this property to true allows writing to a pipeline with a smaller number of datanodes.
+      As a result, it increases the probability of data loss.
+    </description>
+  </property>
+</configuration>

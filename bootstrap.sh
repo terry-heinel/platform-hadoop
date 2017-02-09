@@ -1,6 +1,7 @@
 #!/bin/bash
 
 : ${HADOOP_PREFIX:=/usr/local/hadoop}
+export HADOOP_HOME="$HADOOP_PREFIX"
 
 # YARN binds ports on IPV6 by default. We want IPV4.
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPV4Stack=true"
@@ -11,13 +12,13 @@ if [[ "$2" == "-namenode" ]]; then
   
   . $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
   
-  echo "Hadoop namenode startup."
+  echo "Hadoop namenode: startup"
   
   if [[ ! -f "$HADOOP_PREFIX/data/namenode/current/VERSION" ]]; then
-    echo "Namenode needs formatting, running $HADOOP_PREFIX/bin/hdfs namenode -format"
+    echo "Hadoop namenode formatting: yes, running $HADOOP_PREFIX/bin/hdfs namenode -format"
     $HADOOP_PREFIX/bin/hdfs namenode -format
   else
-    echo "Hadoop namenode already formatted"
+    echo "Hadoop namenode formatting: no, already formatted"
   fi
   
   $HADOOP_PREFIX/sbin/start-dfs.sh
@@ -25,7 +26,7 @@ if [[ "$2" == "-namenode" ]]; then
 fi
 
 if [[ "$2" == "-datanode" ]]; then
-  echo "Hadoop datanode startup."
+  echo "Hadoop datanode: startup"
 fi
 
 if [[ $1 == "-d" ]]; then

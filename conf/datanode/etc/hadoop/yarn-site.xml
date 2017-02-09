@@ -1,0 +1,101 @@
+<configuration>
+
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>platform-hadoop-namenode</value>
+    <description>default 0.0.0.0</description>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>${yarn.resourcemanager.hostname}:8032</value>
+    <description>default ${yarn.resourcemanager.hostname}:8032</description>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+    <value>${yarn.resourcemanager.hostname}:8030</value>
+    <description>default ${yarn.resourcemanager.hostname}:8030</description>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.webapp.address</name>
+    <value>${yarn.resourcemanager.hostname}:8088</value>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>${yarn.resourcemanager.hostname}:8031</value>
+    <description>default ${yarn.resourcemanager.hostname}:8031</description>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.admin.address</name>
+    <value>${yarn.resourcemanager.hostname}:8033</value>
+  </property> 
+
+  <!-- this is the YARN per-slave nodemanager, not the HDFS namenode -->
+  <property>
+    <name>yarn.nodemanager.hostname</name>
+    <value>0.0.0.0</value>
+    <description>default 0.0.0.0</description>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.address</name>
+    <value>${yarn.nodemanager.hostname}:45454</value>
+    <description>default ${yarn.nodemanager.hostname}:0</description>
+  </property>
+  
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+    <description>no default</description>
+  </property>
+
+  <property>
+     <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+     <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.webapp.address</name>
+    <value>${yarn.nodemanager.hostname}:8042</value>
+    <description>default ${yarn.nodemanager.hostname}:8042</description>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.delete.debug-delay-sec</name>
+    <value>600</value>
+    <description>
+      Number of seconds after an application finishes before the nodemanager's
+      DeletionService will delete the application's localized file directory
+      and log directory.
+
+      To diagnose Yarn application problems, set this property's value large
+      enough (for example, to 600 = 10 minutes) to permit examination of these
+      directories. After changing the property's value, you must restart the
+      nodemanager in order for it to have an effect.
+
+      The roots of Yarn applications' work directories is configurable with
+      the yarn.nodemanager.local-dirs property (see below), and the roots
+      of the Yarn applications' log directories is configurable with the
+      yarn.nodemanager.log-dirs property (see also below) (default 0).
+    </description>
+  </property>
+
+  <!-- This was in the PoC cluster settings so leaving it in place for now -->
+  <property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+    <description>Whether virtual memory limits will be enforced for containers (default true)</description>
+  </property>
+
+  <!-- This was in the PoC cluster settings so leaving it in place for now -->
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>12000</value>
+    <description>Amount of physical memory, in MB, that can be allocated for containers (default 8192)</description>
+  </property>
+
+</configuration>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///usr/local/hadoop/data/namenode</value>
+    <description>
+      Determines where on the local filesystem the DFS name node should store
+      the name table(fsimage). If this is a comma-delimited list of directories
+      then the name table is replicated in all of the directories, for
+      redundancy. (? directory for namespace and transaction logs storage)
+      default: file://${hadoop.tmp.dir}/dfs/name
+    </description>
+  </property>
+  <property>
+    <name>dfs.replication</name>
+    <value>3</value>
+    <description>default 3</description>
+  </property>
+  <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>dfs.permissions.enabled</name>
+    <value>false</value>
+    <description>default true</description>
+  </property>
+  <property>
+    <name>dfs.datanode.use.datanode.hostname</name>
+    <value>false</value>
+    <description>default false</description>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>platform-hadoop-namenode:9870</value>
+    <description>
+      Your NameNode hostname for http access (default is 0.0.0.0:9870)
+       (previous default port was 50070, now 9870)
+    </description>
+    </description>
+  </property>
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>platform-hadoop-namenode:9868</value>
+    <description>
+      Your Secondary NameNode hostname for http access (default is 0.0.0.0:9868)
+      (previous default port was 50090, now 9868)
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.use.datanode.hostname</name>
+    <value>true</value>
+    <description>
+      default false
+      Whether clients should use datanode hostnames when connecting to datanodes.
+    </description>
+  </property>
+  <property>
+    <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
+    <value>false</value>
+    <description>
+      If true (the default), then the namenode requires that a connecting
+      datanode's address must be resolved to a hostname. If necessary, a
+      reverse DNS lookup is performed. All attempts to register a datanode
+      from an unresolvable address are rejected. It is recommended that this
+      setting be left on to prevent accidental registration of datanodes listed
+      by hostname in the excludes file during a DNS outage. Only set this to
+      false in environments where there is no infrastructure to support reverse
+      DNS lookup.
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.block.write.replace-datanode-on-failure.enable</name>
+    <value>false</value>
+    <description>
+      default true
+      When the cluster size is extremely small, e.g. 3 nodes or less, cluster
+      administrators may want to set the policy to NEVER in the default
+      configuration file or disable this feature.  Otherwise, users may
+      experience an unusually high rate of pipeline failures since it is
+      impossible to find new datanodes for replacement.
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.block.write.replace-datanode-on-failure.policy</name>
+    <value>DEFAULT</value>
+    <description>
+      Only used if the value of dfs.client.block.write.replace-datanode-on-failure.enable is true
+      Options are DEFAULT, NEVER, and ALWAYS
+    </description>
+  </property>
+  <property>
+    <name>dfs.client.block.write.replace-datanode-on-failure.best-effort</name>
+    <value>true</value>
+    <description>
+      default true
+      Only used if the value of dfs.client.block.write.replace-datanode-on-failure.enable is true.
+      Best effort means that the client will try to replace a failed datanode
+      in write pipeline (provided that the policy is satisfied), however, it 
+      continues the write operation in case that the datanode replacement also fails.
+      Setting this property to true allows writing to a pipeline with a smaller number of datanodes.
+      As a result, it increases the probability of data loss.
+    </description>
+  </property>
+</configuration>
